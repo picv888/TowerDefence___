@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EnemyGauss : EnemyBase {
 
-    protected override void Start () {
-        base.Start();
-        speed = 10f;
-        health = 50f;
+    protected override void Awake() {
+        base.Awake();
     }
 
-    // Update is called once per frame
-    protected override void Update() {
-        base.Update();
+    protected override void OnEnable() {
+        base.OnEnable();
+        health = 20;
+        speed = 5;
     }
 }

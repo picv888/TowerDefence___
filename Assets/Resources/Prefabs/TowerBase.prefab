@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 33759680892316002}
   - component: {fileID: 23243545488641426}
   - component: {fileID: 65317400226260668}
-  m_Layer: 10
+  - component: {fileID: 114273195813267280}
+  m_Layer: 9
   m_Name: TowerBase
   m_TagString: TowerBases
   m_Icon: {fileID: 0}
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1171265855120712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.91, y: -3, z: 13}
+  m_LocalPosition: {x: -30.39, y: 3, z: 6.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,3 +96,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.100874, y: 0.56496215, z: 2.1008759}
   m_Center: {x: 0, y: 0.28248107, z: 0}
+--- !u!114 &114273195813267280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1171265855120712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a827b4b6517711140ad933c0f93693af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBuild: 0

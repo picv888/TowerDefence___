@@ -326,6 +326,6 @@ MonoBehaviour:
   pathParent: {fileID: 0}
   pathNodeList: []
   currentPathNodeID: 0
-  speed: 5
-  health: 20
+  speed: 0
+  health: 0
   state: 0

@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4692742822350448}
   - component: {fileID: 33169827466536176}
   - component: {fileID: 23349830032656726}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Gatling_Up_Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4605675159637108}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GunPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4784205695128972}
   - component: {fileID: 33263708827402584}
   - component: {fileID: 23944887615006072}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Gatling_Up_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 65462813884743560}
   - component: {fileID: 82754420923757282}
   - component: {fileID: 114188475428366434}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TurretGatling-Ready
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 4932281892179240}
   - component: {fileID: 33823088245460554}
   - component: {fileID: 23061751668071520}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Gatling_Up_Armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 33596863205367560}
   - component: {fileID: 23779119267963582}
   - component: {fileID: 65388106192050204}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Gatling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 4025412266415248}
   - component: {fileID: 33544976959292200}
   - component: {fileID: 23841407083632698}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Gatling_Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,6 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0fc62fac069e94591c931c70139b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerBase: {fileID: 0}
   userTower: {fileID: 1227387682806206, guid: d95d5ec4068784e36bc44768c81f856a, type: 2}
 --- !u!198 &198125451070798490
 ParticleSystem:

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour,IPoolReSetable {
+public abstract class EnemyBase : MonoBehaviour {
+    private GameObject pathPrefab;
     public Transform pathParent;
     public List<Transform> pathNodeList;
     public int currentPathNodeID;
@@ -10,37 +11,34 @@ public abstract class EnemyBase : MonoBehaviour,IPoolReSetable {
     public float health;
     public EnemyState state;
 
-    protected virtual void Start() {
+    protected virtual void Awake() {
         pathNodeList = new List<Transform>();
-        currentPathNodeID = 1;
-        GameObject path = GameObject.FindWithTag("Path");
-        if(path == null) {
-            Debug.Log("找不到寻路路径父节点");
+        GameObject path = GameObject.Find("Path12312313123123");
+        if (path == null) {
+            //-34.59 1.5 -3.87
+            pathPrefab = Resources.Load<GameObject>("Prefabs/Path-1");
+            path = Instantiate<GameObject>(pathPrefab, new Vector3(-34.59f, 1.5f, -3.87f), Quaternion.identity);
+            path.name = "Path12312313123123";
         }
-        else {
-            pathParent = path.transform;
-            //初始化路点列表
-            //把路点导入到路点列表
-            for(int i = 0; i < pathParent.childCount; i++) {
-                pathNodeList.Add(pathParent.GetChild(i));
-            }
-            //把自己放在路点的第一个位置
-            transform.position = pathNodeList[0].position;
-            if(pathNodeList.Count >= 2) {
-                transform.rotation = Quaternion.LookRotation(pathNodeList[1].position - pathNodeList[0].position);
-            }
+        pathParent = path.transform;
+        //初始化路点列表
+        //把路点导入到路点列表
+        for (int i = 0; i < pathParent.childCount; i++) {
+            pathNodeList.Add(pathParent.GetChild(i));
         }
-
-        speed = 5f;
-        health = 10f;
-        if(health <= 0f) {
-            Debug.Log("没有设置生命值");
-        }
-        state = EnemyState.Move;
+        //把自己放在路点的第一个位置
+        transform.position = pathNodeList[0].position;
+        transform.rotation = pathNodeList[0].rotation;
     }
 
-    public virtual void ResetFromPool() {
-        Start();
+    protected virtual void OnEnable() {
+        //把自己放在路点的第一个位置
+        transform.position = pathNodeList[0].position;
+        transform.rotation = pathNodeList[0].rotation;
+        currentPathNodeID = 1;
+        health = 10f;
+        speed = 5f;
+        state = EnemyState.Move;
     }
 
     protected virtual void Update() {
@@ -48,7 +46,7 @@ public abstract class EnemyBase : MonoBehaviour,IPoolReSetable {
     }
 
     public virtual void Action() {
-        switch(state) {
+        switch (state) {
             case EnemyState.Idle:
                 Idle();
                 break;
@@ -65,7 +63,7 @@ public abstract class EnemyBase : MonoBehaviour,IPoolReSetable {
 
     public virtual void Move() {
         //如果怪物还没有到达路点中最后一个点
-        if(currentPathNodeID < pathNodeList.Count) {
+        if (currentPathNodeID < pathNodeList.Count) {
 
             transform.position = Vector3.MoveTowards(transform.position, pathNodeList[currentPathNodeID].position, speed * Time.deltaTime);
             Quaternion to = Quaternion.LookRotation((pathNodeList[currentPathNodeID].position - transform.position));
@@ -73,7 +71,7 @@ public abstract class EnemyBase : MonoBehaviour,IPoolReSetable {
 
             //如果我离下一个点的距离到达某一个值
             float distance = Vector3.Distance(transform.position, pathNodeList[currentPathNodeID].position);
-            if(distance <= speed * Time.deltaTime) {
+            if (distance <= speed * Time.deltaTime) {
                 //改变我的当前点，进而改变目标点，成下一个点
                 currentPathNodeID++;
             }
@@ -90,7 +88,7 @@ public abstract class EnemyBase : MonoBehaviour,IPoolReSetable {
 
     public virtual void Damage(float damage) {
         health -= damage;
-        if(health <= 0f) {
+        if (health <= 0f) {
             state = EnemyState.Death;
         }
     }

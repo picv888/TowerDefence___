@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPoolReSetable {
-    void ResetFromPool();
-}
-
 public class Pool {
 
     public static Pool _instance;
@@ -17,7 +13,7 @@ public class Pool {
             return _instance;
         }
     }
-    public Dictionary<string, LinkedList<GameObject>> poolDict = new Dictionary<string, LinkedList<GameObject>>();
+    public Dictionary<string, List<GameObject>> poolDict = new Dictionary<string, List<GameObject>>();
 
     private Pool() { }
 
@@ -29,25 +25,25 @@ public class Pool {
     public GameObject Instantiate(GameObject go, Vector3 position, Quaternion quaternion) {
         string key = "Pool-" + go.name;
         GameObject gameObj;
-
-        if (poolDict.ContainsKey(key) && poolDict[key].Count > 0) {
-            gameObj = poolDict[key].First.Value;
-            poolDict[key].RemoveFirst();
-        }
-        else if (poolDict.ContainsKey(key) && poolDict[key].Count == 0) {
-            gameObj = Object.Instantiate<GameObject>(go, position, Quaternion.identity);
+        bool isContainsKey = poolDict.ContainsKey(key);
+        if (isContainsKey) {
+            List<GameObject> list = poolDict[key];
+            if (list.Count > 0) {
+                int lastIndex = list.Count - 1;
+                gameObj = list[lastIndex];
+                gameObj.transform.position = position;
+                gameObj.transform.rotation = quaternion;
+                list.RemoveAt(lastIndex);
+            }
+            else {
+                gameObj = Object.Instantiate<GameObject>(go, position, quaternion);
+            }
         }
         else {
-            gameObj = Object.Instantiate<GameObject>(go, position, Quaternion.identity);
-            LinkedList<GameObject> list = new LinkedList<GameObject>();
-            poolDict.Add(key, list);
+            gameObj = Object.Instantiate<GameObject>(go, position, quaternion);
+            poolDict.Add(key, new List<GameObject>());
         }
         gameObj.name = key;
-        gameObj.transform.position = position;
-        IPoolReSetable r = gameObj.GetComponent<IPoolReSetable>();
-        if (r != null) {
-            r.ResetFromPool();
-        }
         gameObj.SetActive(true);
         return gameObj;
     }
@@ -55,9 +51,8 @@ public class Pool {
     //放入池子
     public void Destroy(GameObject go) {
         string key = go.name;
-        poolDict[key].AddLast(go);
-        go.transform.position = new Vector3(9999, 9999, 9999);
+        poolDict[key].Add(go);
+        go.transform.position = new Vector3(0, 6, 0f);
         go.SetActive(false);
     }
-
 }

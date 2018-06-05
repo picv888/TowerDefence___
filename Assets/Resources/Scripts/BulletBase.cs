@@ -12,9 +12,13 @@ public class BulletBase : MonoBehaviour {
         speed = 13f;
         damagePoint = 1f;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    protected virtual void OnEnable() {
+        
+    }
+
+    // Update is called once per frame
+    void Update () {
         if(attackTarget.state == EnemyState.Death) {
             Pool.Instance.Destroy(gameObject);
         }

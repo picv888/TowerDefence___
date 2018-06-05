@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TurretBase : MonoBehaviour, IPoolReSetable {
+public abstract class TurretBase : MonoBehaviour {
     public float attackRadius;
     protected float damagePoint;
     protected float fireCD;
@@ -37,10 +37,6 @@ public abstract class TurretBase : MonoBehaviour, IPoolReSetable {
             Debug.Log("没有设置 AudioSource");
         }
         muzzleEffect = GetComponentInChildren<ParticleSystem>();
-    }
-
-    public void ResetFromPool(){
-        Start();
     }
 
     // Update is called once per frame
@@ -80,7 +76,7 @@ public abstract class TurretBase : MonoBehaviour, IPoolReSetable {
                 if (currentFireCD <= 0f) {
                     //枪口特效
                     if (muzzleEffect != null) {
-                        muzzleEffect.Play();
+                        //muzzleEffect.Play();
                     }
 
                     //开枪声音
@@ -140,9 +136,7 @@ public abstract class TurretBase : MonoBehaviour, IPoolReSetable {
     }
 
     protected virtual void DidFire() {
-        if (muzzleEffect != null) {
-            muzzleEffect.Play();
-        }
+        
     }
 
     protected virtual bool JudgeAttack() {

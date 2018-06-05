@@ -10,7 +10,7 @@ public class IntoPool : MonoBehaviour {
 
     }
 
-    private void OnDisable() {
+    private void OnEnable() {
         time = 0f;
     }
 

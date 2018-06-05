@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EnemyConnon : EnemyBase {
 
-    protected override void Start() {
-        base.Start();
-        speed = 8f;
-        health = 100f;
+    protected override void Awake() {
+        base.Awake();
     }
 
-    // Update is called once per frame
-    protected override void Update() {
-        base.Update();
+    protected override void OnEnable() {
+        base.OnEnable();
+        speed = 8f;
+        health = 100f;
     }
 }
